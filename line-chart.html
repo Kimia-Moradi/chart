@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="500"></canvas>
+    <script>
+        const cvs = document.getElementById('canvas')
+        const ctx = cvs.getContext('2d')
+        
+        const nums = [50, 72, 109, 85, 40, 112, 90]
+        
+        // drawing Y arrow
+        ctx.beginPath()
+        ctx.moveTo(10, 490)
+        // main arrow line
+        ctx.lineTo(10, 10)
+        // right arrow line
+        ctx.lineTo(15, 17)
+        // left arrow line
+        ctx.moveTo(10, 10)
+        ctx.lineTo(5, 17)
+        ctx.stroke()
+        ctx.closePath()
+        
+        // drawing X arrow
+        ctx.beginPath()
+        ctx.moveTo(10, 490)
+        // main arrow line
+        ctx.lineTo(790, 490)
+        // top arrow line
+        ctx.lineTo(783, 485)
+        // bottom arrow line
+        ctx.moveTo(790, 490)
+        ctx.lineTo(783, 495)
+        ctx.stroke()
+        ctx.closePath()
+        
+        // the chart
+        for (let i = 0; i < nums.length; i ++) {
+            const num = nums[i]
+            ctx.beginPath()
+            ctx.moveTo(i * 100 + 50, 500 - (num + 10))
+            ctx.lineTo( (i+1) * 100 + 50, 500 - (nums[i+1] + 10))
+            ctx.stroke()
+            ctx.closePath()
+
+            // dots
+            ctx.beginPath()
+            ctx.fillStyle = "rgb(" + 
+                Math.random() * 255 + "," +
+                Math.random() * 255 + "," +
+                Math.random() * 255 + ")"
+            
+            ctx.arc(i * 100 + 50 , 500 - (num + 10) , 5, 0, Math.PI*2)
+            ctx.fill()
+            ctx.closePath()
+        }
+    </script>
+</body>
+</html>
